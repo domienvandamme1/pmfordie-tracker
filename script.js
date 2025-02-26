@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Set the fixed "today's date" as February 25, 2025 (as per requirements)
-    const fixedToday = new Date(2025, 1, 25); // Month is 0-indexed (1 = February)
+    const fixedToday = new Date(2025, 1, 27); // Month is 0-indexed (1 = February)
     
     // Set the end date as December 31, 2025
     const endDate = new Date(2025, 11, 31); // Month is 0-indexed (11 = December)
