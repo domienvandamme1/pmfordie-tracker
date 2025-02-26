@@ -2,6 +2,10 @@
 
 A simple HTML calendar page that displays one box per day from February 27, 2025, to December 31, 2025. The boxes are grouped into rows, with each row containing 14 days. The page visually distinguishes days that have passed from those that have not by using color-coding.
 
+## Live Demo
+
+Visit the live demo at: [https://domienvandamme1.github.io/pmfordie-tracker/](https://domienvandamme1.github.io/pmfordie-tracker/)
+
 ## Features
 
 - Displays one box per day from February 27, 2025, to December 31, 2025
