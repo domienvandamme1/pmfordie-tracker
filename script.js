@@ -49,10 +49,20 @@ function calculateStats(startDate, endDate, milestoneDate) {
     // Days remaining is from milestone to end
     const daysRemaining = totalDays;
     
+    // Calculate sprint statistics (14 days per sprint)
+    const totalSprints = Math.ceil(totalDays / 14);
+    const sprintsPassed = Math.floor(daysPassed / 14);
+    const sprintsRemaining = totalSprints;
+    
     // Update the stats in the DOM
     document.getElementById('total-days').textContent = totalDays;
     document.getElementById('days-passed').textContent = daysPassed;
     document.getElementById('days-remaining').textContent = daysRemaining;
+    
+    // Update sprint stats in the DOM
+    document.getElementById('total-sprints').textContent = totalSprints;
+    document.getElementById('sprints-passed').textContent = sprintsPassed;
+    document.getElementById('sprints-remaining').textContent = sprintsRemaining;
 }
 
 // Function to generate the calendar

@@ -39,6 +39,10 @@ h1 {
     gap: 20px;
 }
 
+.sprint-stats {
+    margin-top: 10px;
+}
+
 .stat-box {
     display: flex;
     flex-direction: column;
@@ -49,18 +53,35 @@ h1 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.stat-box:nth-child(1) {
+/* Day stats colors */
+.stats:first-of-type .stat-box:nth-child(1) {
     background-color: #4dabf7;
     color: white;
 }
 
-.stat-box:nth-child(2) {
+.stats:first-of-type .stat-box:nth-child(2) {
     background-color: #ff6b6b;
     color: white;
 }
 
-.stat-box:nth-child(3) {
+.stats:first-of-type .stat-box:nth-child(3) {
     background-color: #51cf66;
+    color: white;
+}
+
+/* Sprint stats colors */
+.sprint-stats .stat-box:nth-child(1) {
+    background-color: #845ef7;
+    color: white;
+}
+
+.sprint-stats .stat-box:nth-child(2) {
+    background-color: #ff922b;
+    color: white;
+}
+
+.sprint-stats .stat-box:nth-child(3) {
+    background-color: #20c997;
     color: white;
 }
 
@@ -146,6 +167,10 @@ h1 {
     
     .stat-box {
         width: 80%;
+    }
+    
+    .sprint-stats {
+        margin-top: 0;
     }
 }
 
