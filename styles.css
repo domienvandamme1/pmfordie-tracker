@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.calendar-info {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    border-radius: 8px;
+    min-width: 120px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.stat-box:nth-child(1) {
+    background-color: #4dabf7;
+    color: white;
+}
+
+.stat-box:nth-child(2) {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.stat-box:nth-child(3) {
+    background-color: #51cf66;
+    color: white;
+}
+
+.stat-box span:first-child {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 14px;
+}
+
+.calendar-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.day-box {
+    width: calc(100% / 14 - 10px);
+    min-width: 70px;
+    height: 70px;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.day-box:hover {
+    transform: scale(1.05);
+}
+
+.past {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.upcoming {
+    background-color: #51cf66;
+    color: white;
+}
+
+.day-number {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.month-year {
+    font-size: 12px;
+}
+
+@media (max-width: 1200px) {
+    .day-box {
+        width: calc(100% / 10 - 10px);
+    }
+}
+
+@media (max-width: 768px) {
+    .day-box {
+        width: calc(100% / 7 - 10px);
+    }
+    
+    .stats {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .stat-box {
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    .day-box {
+        width: calc(100% / 4 - 10px);
+        min-width: 60px;
+        height: 60px;
+    }
+} 
