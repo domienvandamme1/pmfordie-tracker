@@ -1,19 +1,22 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Set the fixed "today's date" as February 27, 2025 (as per requirements)
-    const fixedToday = new Date(2025, 1, 27); // Month is 0-indexed (1 = February)
+    // Set the fixed "today's date" as February 25, 2025 (as per requirements)
+    const fixedToday = new Date(2025, 1, 25); // Month is 0-indexed (1 = February)
     
     // Set the end date as December 31, 2025
     const endDate = new Date(2025, 11, 31); // Month is 0-indexed (11 = December)
+    
+    // Set the milestone date (February 27, 2025)
+    const milestoneDate = new Date(2025, 1, 27);
     
     // Display the current date in the header
     const currentDateElement = document.getElementById('current-date');
     currentDateElement.textContent = formatDate(fixedToday);
     
     // Calculate and display stats
-    calculateStats(fixedToday, endDate);
+    calculateStats(fixedToday, endDate, milestoneDate);
     
     // Generate the calendar
-    generateCalendar(fixedToday, endDate);
+    generateCalendar(fixedToday, endDate, milestoneDate);
 });
 
 // Function to format date as "Month Day, Year"
@@ -36,14 +39,14 @@ function formatDayBox(date) {
 }
 
 // Function to calculate and display stats
-function calculateStats(startDate, endDate) {
-    // Calculate the total number of days
-    const totalDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+function calculateStats(startDate, endDate, milestoneDate) {
+    // Calculate the total number of days from milestone to end date
+    const totalDays = Math.floor((endDate - milestoneDate) / (1000 * 60 * 60 * 24)) + 1;
     
-    // Since we're starting from the "today" date, days passed is 0
-    const daysPassed = 0;
+    // Calculate days passed (days between start date and milestone date)
+    const daysPassed = Math.floor((milestoneDate - startDate) / (1000 * 60 * 60 * 24));
     
-    // Days remaining is the total days
+    // Days remaining is from milestone to end
     const daysRemaining = totalDays;
     
     // Update the stats in the DOM
@@ -53,7 +56,7 @@ function calculateStats(startDate, endDate) {
 }
 
 // Function to generate the calendar
-function generateCalendar(startDate, endDate) {
+function generateCalendar(startDate, endDate, milestoneDate) {
     const calendarContainer = document.getElementById('calendar-container');
     
     // Calculate the number of days between start and end dates
@@ -79,10 +82,13 @@ function generateCalendar(startDate, endDate) {
             const currentDateCopy = new Date(currentDate);
             
             // Add the appropriate class based on whether the day has passed
-            // According to requirements, Feb 27, 2025 and after are "upcoming" (green)
             // Days before Feb 27, 2025 are "past" (red)
-            // But since we're starting from Feb 27, 2025, all days should be "upcoming"
-            dayBox.classList.add('upcoming');
+            // Feb 27, 2025 and after are "upcoming" (green)
+            if (currentDateCopy < milestoneDate) {
+                dayBox.classList.add('past');
+            } else {
+                dayBox.classList.add('upcoming');
+            }
             
             // Format the date for display
             const formattedDate = formatDayBox(currentDateCopy);
