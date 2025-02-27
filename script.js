@@ -2,11 +2,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set the start date as January 27, 2025
     const startDate = new Date(2025, 0, 27); // Month is 0-indexed (0 = January)
     
-    // Get the current date in UTC/HKT (UTC+8)
+    // For testing purposes, set a fixed date (February 27, 2025)
+    // Comment this out to use the actual current date
+    const currentDate = new Date(2025, 1, 27); // February 27, 2025
+    
+    /* 
+    // Get the current date in UTC/HKT (UTC+8) - uncomment to use real current date
     const now = new Date();
     // Adjust to HKT (UTC+8)
     const hktOffset = 8 * 60 * 60 * 1000; // 8 hours in milliseconds
     const currentDate = new Date(now.getTime() + hktOffset + now.getTimezoneOffset() * 60 * 1000);
+    */
     
     // Set the end date as December 31, 2025
     const endDate = new Date(2025, 11, 31); // Month is 0-indexed (11 = December)
@@ -100,7 +106,7 @@ function generateCalendar(startDate, endDate, currentDate) {
             dayBox.className = 'day-box';
             
             // Get the current date being processed
-            const currentDateCopy = new Date(dateIterator);
+            const currentDateCopy = new Date(dateIterator.getTime());
             
             // Add the appropriate class based on the date
             if (isSameDay(currentDateCopy, currentDate)) {
