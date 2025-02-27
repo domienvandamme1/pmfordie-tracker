@@ -38,6 +38,13 @@ function formatDayBox(date) {
     };
 }
 
+// Function to check if two dates are the same day
+function isSameDay(date1, date2) {
+    return date1.getFullYear() === date2.getFullYear() &&
+           date1.getMonth() === date2.getMonth() &&
+           date1.getDate() === date2.getDate();
+}
+
 // Function to calculate and display stats
 function calculateStats(startDate, endDate, milestoneDate) {
     // Calculate the total number of days from milestone to end date
@@ -91,10 +98,10 @@ function generateCalendar(startDate, endDate, milestoneDate) {
             // Get the current date being processed
             const currentDateCopy = new Date(currentDate);
             
-            // Add the appropriate class based on whether the day has passed
-            // Days before Feb 27, 2025 are "past" (red)
-            // Feb 27, 2025 and after are "upcoming" (green)
-            if (currentDateCopy < milestoneDate) {
+            // Add the appropriate class based on the date
+            if (isSameDay(currentDateCopy, startDate)) {
+                dayBox.classList.add('current');
+            } else if (currentDateCopy < startDate) {
                 dayBox.classList.add('past');
             } else {
                 dayBox.classList.add('upcoming');

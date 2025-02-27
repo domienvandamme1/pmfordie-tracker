@@ -134,6 +134,11 @@ h1 {
     color: white;
 }
 
+.current {
+    background-color: #ffd43b;
+    color: black;
+}
+
 .upcoming {
     background-color: #51cf66;
     color: white;
