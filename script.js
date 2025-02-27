@@ -3,10 +3,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const startDate = new Date(2025, 0, 27); // Month is 0-indexed (0 = January)
     
     // For testing purposes, set a fixed date (February 27, 2025)
-    // Comment this out to use the actual current date
-    const currentDate = new Date(2025, 1, 27); // February 27, 2025
+    const fixedDate = new Date(2025, 1, 27); // February 27, 2025
+    const currentDate = fixedDate; // Use the fixed date for testing
     
-    /* 
+    // Comment out dynamic date calculation for now
+    /*
     // Get the current date in UTC/HKT (UTC+8) - uncomment to use real current date
     const now = new Date();
     // Adjust to HKT (UTC+8)
