@@ -1,22 +1,22 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Set the fixed "today's date" as February 25, 2025 (as per requirements)
-    const fixedToday = new Date(2025, 1, 27); // Month is 0-indexed (1 = February)
+    // Set the start date as January 13, 2025
+    const startDate = new Date(2025, 0, 13); // Month is 0-indexed (0 = January)
+    
+    // Set the fixed "today's date" as January 27, 2025
+    const fixedToday = new Date(2025, 0, 27); // Month is 0-indexed (0 = January)
     
     // Set the end date as December 31, 2025
     const endDate = new Date(2025, 11, 31); // Month is 0-indexed (11 = December)
-    
-    // Set the milestone date (February 27, 2025)
-    const milestoneDate = new Date(2025, 1, 27);
     
     // Display the current date in the header
     const currentDateElement = document.getElementById('current-date');
     currentDateElement.textContent = formatDate(fixedToday);
     
     // Calculate and display stats
-    calculateStats(fixedToday, endDate, milestoneDate);
+    calculateStats(startDate, endDate, fixedToday);
     
     // Generate the calendar
-    generateCalendar(fixedToday, endDate, milestoneDate);
+    generateCalendar(startDate, endDate, fixedToday);
 });
 
 // Function to format date as "Month Day, Year"
@@ -46,20 +46,20 @@ function isSameDay(date1, date2) {
 }
 
 // Function to calculate and display stats
-function calculateStats(startDate, endDate, milestoneDate) {
-    // Calculate the total number of days from milestone to end date
-    const totalDays = Math.floor((endDate - milestoneDate) / (1000 * 60 * 60 * 24)) + 1;
+function calculateStats(startDate, endDate, currentDate) {
+    // Calculate the total number of days from start to end date
+    const totalDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
     
-    // Calculate days passed (days between start date and milestone date)
-    const daysPassed = Math.floor((milestoneDate - startDate) / (1000 * 60 * 60 * 24));
+    // Calculate days passed (days between start date and current date)
+    const daysPassed = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
     
-    // Days remaining is from milestone to end
-    const daysRemaining = totalDays;
+    // Days remaining is from current date to end date
+    const daysRemaining = Math.floor((endDate - currentDate) / (1000 * 60 * 60 * 24)) + 1;
     
     // Calculate sprint statistics (14 days per sprint)
     const totalSprints = Math.ceil(totalDays / 14);
     const sprintsPassed = Math.floor(daysPassed / 14);
-    const sprintsRemaining = totalSprints;
+    const sprintsRemaining = Math.ceil(daysRemaining / 14);
     
     // Update the stats in the DOM
     document.getElementById('total-days').textContent = totalDays;
@@ -73,8 +73,9 @@ function calculateStats(startDate, endDate, milestoneDate) {
 }
 
 // Function to generate the calendar
-function generateCalendar(startDate, endDate, milestoneDate) {
+function generateCalendar(startDate, endDate, currentDate) {
     const calendarContainer = document.getElementById('calendar-container');
+    calendarContainer.innerHTML = ''; // Clear any existing content
     
     // Calculate the number of days between start and end dates
     const dayDifference = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
@@ -82,7 +83,7 @@ function generateCalendar(startDate, endDate, milestoneDate) {
     // Calculate the number of rows needed (14 days per row)
     const rowCount = Math.ceil(dayDifference / 14);
     
-    let currentDate = new Date(startDate);
+    let dateIterator = new Date(startDate);
     let dayCounter = 0;
     
     // Create rows
@@ -96,12 +97,12 @@ function generateCalendar(startDate, endDate, milestoneDate) {
             dayBox.className = 'day-box';
             
             // Get the current date being processed
-            const currentDateCopy = new Date(currentDate);
+            const currentDateCopy = new Date(dateIterator);
             
             // Add the appropriate class based on the date
-            if (isSameDay(currentDateCopy, startDate)) {
+            if (isSameDay(currentDateCopy, currentDate)) {
                 dayBox.classList.add('current');
-            } else if (currentDateCopy < startDate) {
+            } else if (currentDateCopy < currentDate) {
                 dayBox.classList.add('past');
             } else {
                 dayBox.classList.add('upcoming');
@@ -127,7 +128,7 @@ function generateCalendar(startDate, endDate, milestoneDate) {
             rowElement.appendChild(dayBox);
             
             // Move to the next day
-            currentDate.setDate(currentDate.getDate() + 1);
+            dateIterator.setDate(dateIterator.getDate() + 1);
             dayCounter++;
         }
         
