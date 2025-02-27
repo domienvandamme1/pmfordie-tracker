@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set the start date as January 27, 2025
     const startDate = new Date(2025, 0, 27); // Month is 0-indexed (0 = January)
     
-    // For testing purposes, set a fixed date (February 27, 2025)
-    const fixedDate = new Date(2025, 1, 27); // February 27, 2025
+    // For testing purposes, set the current date to also be January 27, 2025 (same as start date)
+    const fixedDate = new Date(2025, 0, 27); // January 27, 2025
     const currentDate = fixedDate; // Use the fixed date for testing
     
     // Comment out dynamic date calculation for now
