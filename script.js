@@ -1,22 +1,25 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Set the start date as January 13, 2025
-    const startDate = new Date(2025, 0, 13); // Month is 0-indexed (0 = January)
+    // Set the start date as January 27, 2025
+    const startDate = new Date(2025, 0, 27); // Month is 0-indexed (0 = January)
     
-    // Set the fixed "today's date" as January 27, 2025
-    const fixedToday = new Date(2025, 0, 27); // Month is 0-indexed (0 = January)
+    // Get the current date in UTC/HKT (UTC+8)
+    const now = new Date();
+    // Adjust to HKT (UTC+8)
+    const hktOffset = 8 * 60 * 60 * 1000; // 8 hours in milliseconds
+    const currentDate = new Date(now.getTime() + hktOffset + now.getTimezoneOffset() * 60 * 1000);
     
     // Set the end date as December 31, 2025
     const endDate = new Date(2025, 11, 31); // Month is 0-indexed (11 = December)
     
     // Display the current date in the header
     const currentDateElement = document.getElementById('current-date');
-    currentDateElement.textContent = formatDate(fixedToday);
+    currentDateElement.textContent = formatDate(currentDate);
     
     // Calculate and display stats
-    calculateStats(startDate, endDate, fixedToday);
+    calculateStats(startDate, endDate, currentDate);
     
     // Generate the calendar
-    generateCalendar(startDate, endDate, fixedToday);
+    generateCalendar(startDate, endDate, currentDate);
 });
 
 // Function to format date as "Month Day, Year"
@@ -51,10 +54,10 @@ function calculateStats(startDate, endDate, currentDate) {
     const totalDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
     
     // Calculate days passed (days between start date and current date)
-    const daysPassed = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
+    const daysPassed = Math.max(0, Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24)));
     
     // Days remaining is from current date to end date
-    const daysRemaining = Math.floor((endDate - currentDate) / (1000 * 60 * 60 * 24)) + 1;
+    const daysRemaining = Math.max(0, Math.floor((endDate - currentDate) / (1000 * 60 * 60 * 24)) + 1);
     
     // Calculate sprint statistics (14 days per sprint)
     const totalSprints = Math.ceil(totalDays / 14);
